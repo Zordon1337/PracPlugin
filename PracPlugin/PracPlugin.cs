@@ -148,7 +148,7 @@ namespace PracPlugin
                 Server.ExecuteCommand("game_type 0");
                 var currentmap = Server.MapName;
                 Server.ExecuteCommand($"changelevel {currentmap}");
-            })
+            });
             
             base.Load(hotReload);
         }
