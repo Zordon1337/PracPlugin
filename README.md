@@ -1,5 +1,6 @@
 # PracPlugin
-
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Zordon1337/PracPlugin/.github%2Fworkflows%2Fdotnet.yml)
+![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
 
 ## Commands
 - bots <bots_amount> - adds bots to each team
