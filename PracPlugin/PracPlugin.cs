@@ -191,9 +191,9 @@ namespace PracPlugin
                         var cl = client?.InGameMoneyServices;
                         if (cl != null)
                         {
-                            cl.Account = cl.Account + 3000;
+                            cl.Account = cl.Account + 1500;
                         }
-                        client?.PrintToCenterAlert("You get 3000$ for winning knife round");
+                        client?.PrintToCenterAlert("You get 1500$ for winning knife round");
                     }
                 }
 
