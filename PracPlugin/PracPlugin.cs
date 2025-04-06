@@ -106,7 +106,7 @@ namespace PracPlugin
             });
             AddCommand("help", "", (player, info) =>
             {
-                info.ReplyToCommand("Commands: bots <bots_amount>, removebots, botdifficulty <bots_diff>, skipwarmup , onlybotsct <bots_amount>, onlybotst <bots_amount>, disablebans, enablebans, maxrounds <rounds>, changemap <map_name>, swapteams, casual, deathmatch, flyingscout ");
+                info.ReplyToCommand("Commands: bots <bots_amount>, removebots, botdifficulty <bots_diff>, skipwarmup , onlybotsct <bots_amount>, onlybotst <bots_amount>, disablebans, enablebans, maxrounds <rounds>, changemap <map_name>, swapteams, casual, deathmatch, competetive, wingman ");
             });
             AddCommand("changemap", "", (player, info) =>
             {
@@ -133,16 +133,22 @@ namespace PracPlugin
                 var currentmap = Server.MapName;
                 Server.ExecuteCommand($"changelevel {currentmap}");
             });
-            AddCommand("flyingscout", "", (player, info) =>
+            AddCommand("competetive", "", (player, info) =>
             {
-                player?.PrintToCenterAlert("Changing mode to Flying Scoutsman");
-                Server.ExecuteCommand("game_mode 0");
+                player?.PrintToCenterAlert("Changing mode to Competetive");
+                Server.ExecuteCommand("game_mode 1");
                 Server.ExecuteCommand("game_type 0");
-                Server.ExecuteCommand("sv_game_mode_flags 0");
-                Server.ExecuteCommand("sv_skirmish_id 3");
                 var currentmap = Server.MapName;
                 Server.ExecuteCommand($"changelevel {currentmap}");
             });
+            AddCommand("wingman", "", (player, info) =>
+            {
+                player?.PrintToCenterAlert("Changing mode to Wingman");
+                Server.ExecuteCommand("game_mode 2");
+                Server.ExecuteCommand("game_type 0");
+                var currentmap = Server.MapName;
+                Server.ExecuteCommand($"changelevel {currentmap}");
+            })
             
             base.Load(hotReload);
         }
