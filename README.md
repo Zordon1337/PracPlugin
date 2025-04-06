@@ -1,4 +1,4 @@
-# PracPlugin
+# PracPlugin ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Zordon1337/PracPlugin/.github%2Fworkflows%2Fdotnet.yml)
 
 
 ## Commands
