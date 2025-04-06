@@ -104,7 +104,7 @@ namespace PracPlugin
                 Server.ExecuteCommand($"mp_maxrounds {arg}");
                 info.ReplyToCommand($"Set max rounds to {arg}");
             });
-            AddCommand("help", "", (player, info) =>
+            AddCommand("prachelp", "", (player, info) =>
             {
                 info.ReplyToCommand("Commands: bots <bots_amount>, removebots, botdifficulty <bots_diff>, skipwarmup , onlybotsct <bots_amount>, onlybotst <bots_amount>, disablebans, enablebans, maxrounds <rounds>, changemap <map_name>, swapteams, casual, deathmatch, competetive, wingman ");
             });
@@ -171,12 +171,6 @@ namespace PracPlugin
                     if(cl != null)
                     {
                         cl.Account = 0;
-                    }
-
-                    var cli = client?.MusicKitID;
-                    if(cli != null)
-                    {
-                        cli = 7;
                     }
 
                 }
