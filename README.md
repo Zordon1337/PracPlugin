@@ -2,6 +2,7 @@
 
 
 ## Commands
+- prachelp - displays all available commands
 - bots <bots_amount> - adds bots to each team
 - removebots - self explainatory
 - botdifficulty <bots_diff> - self explainatory
