@@ -17,6 +17,14 @@
 - deathmatch - same as above but with dm
 - competetive - same as above but with comp
 - wingman - same as above but with wingman
+- botdisableweapons - disables all weapons for bots
+- botenableweapons - enables all weapons for bots
+- botknifes - toggles knife for bots weapon pool
+- botsnipers - toggles snipers for bots weapon pool
+- botshotguns - toggles shotguns for bots weapon pool
+- botpistol - toggles pistols for bots weapon pool
+- botsmg - toggles smgs for bots weapon pool
+- botrifles - toggles rifles for bots weapon pool
 
 ## Currently Implemented
 - Settings bots difficulty

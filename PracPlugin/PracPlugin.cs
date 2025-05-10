@@ -23,20 +23,29 @@ namespace PracPlugin
         {
             AddCommand("bots", "adds friends", (player, info) =>
             {
-                int bots = 5;
-                if (info.ArgByIndex(1) != null)
+                try
                 {
-                    bots = int.Parse(info.ArgByIndex(1));
-                }
-                Server.ExecuteCommand("mp_limitteams 2");
-                Server.ExecuteCommand("mp_autoteambalance 1");
-                Server.ExecuteCommand("bot_quota_mode fill");
-                Server.ExecuteCommand("bot_quota 10");
-                for (int i = 0; i < bots; i++)
+                    int bots = 5;
+                    if (info.ArgByIndex(1) != null)
+                    {
+                        bots = int.Parse(info.ArgByIndex(1));
+                    }
+
+                    Server.ExecuteCommand("mp_limitteams 2");
+                    Server.ExecuteCommand("mp_autoteambalance 1");
+                    Server.ExecuteCommand("bot_quota_mode fill");
+                    Server.ExecuteCommand("bot_quota 10");
+                    for (int i = 0; i < bots; i++)
+                    {
+                        Server.ExecuteCommand("bot_add");
+                    }
+                    info.ReplyToCommand("Added bots");
+                } catch(Exception)
                 {
-                    Server.ExecuteCommand("bot_add");
+                    info.ReplyToCommand("Invalid argument");
+                    return;
                 }
-                info.ReplyToCommand("Added bots");
+
             });
             AddCommand("removebots", "removes friends", (player, info) =>
             {
@@ -46,6 +55,11 @@ namespace PracPlugin
             AddCommand("botdifficulty", "", (player, info) =>
             {
                 var arg = info.ArgByIndex(1);
+                if(int.TryParse(arg, out int result) == false)
+                {
+                    info.ReplyToCommand("Invalid argument");
+                    return;
+                }
                 Server.ExecuteCommand($"bot_difficulty {arg}"); // 0 = easy, 1 = normal, 2 = hard, 3 = expert
                 info.ReplyToCommand($"Set bot difficulty to {arg}");
             });
@@ -58,10 +72,11 @@ namespace PracPlugin
             });
             AddCommand("onlybotsct", "", (player, info) =>
             {
-                int bots = 5;
-                if (info.ArgByIndex(1) != null)
+                var arg = info.ArgByIndex(1);
+                if (int.TryParse(arg, out int bots) == false)
                 {
-                    bots = int.Parse(info.ArgByIndex(1));
+                    info.ReplyToCommand("Invalid argument");
+                    return;
                 }
                 Server.ExecuteCommand("mp_limitteams 0");
                 Server.ExecuteCommand("mp_autoteambalance 0");
@@ -74,10 +89,11 @@ namespace PracPlugin
             });
             AddCommand("onlybotst", "", (player, info) =>
             {
-                int bots = 5;
-                if(info.ArgByIndex(1) != null)
+                var arg = info.ArgByIndex(1);
+                if (int.TryParse(arg, out int bots) == false)
                 {
-                    bots = int.Parse(info.ArgByIndex(1));
+                    info.ReplyToCommand("Invalid argument");
+                    return;
                 }
                 Server.ExecuteCommand("mp_limitteams 0");
                 Server.ExecuteCommand("mp_autoteambalance 0");
@@ -101,16 +117,26 @@ namespace PracPlugin
             AddCommand("maxrounds", "", (player, info) =>
             {
                 var arg = info.ArgByIndex(1);
+                if (int.TryParse(arg, out int bots) == false)
+                {
+                    info.ReplyToCommand("Invalid argument");
+                    return;
+                }
                 Server.ExecuteCommand($"mp_maxrounds {arg}");
                 info.ReplyToCommand($"Set max rounds to {arg}");
-            });
+            }); 
             AddCommand("prachelp", "", (player, info) =>
             {
-                info.ReplyToCommand("Commands: bots <bots_amount>, removebots, botdifficulty <bots_diff>, skipwarmup , onlybotsct <bots_amount>, onlybotst <bots_amount>, disablebans, enablebans, maxrounds <rounds>, changemap <map_name>, swapteams, casual, deathmatch, competetive, wingman ");
+                info.ReplyToCommand("Commands: bots <bots_amount>, removebots, botdifficulty <bots_diff>, skipwarmup, onlybotsct <bots_amount>, onlybotst <bots_amount>, disablebans, enablebans, maxrounds <rounds>, changemap <map_name>, swapteams, casual, deathmatch, competetive, wingman, botdisableweapons, botenableweapons, botknifes, botsnipers, botpistol, botsmg, botrifles");
             });
             AddCommand("changemap", "", (player, info) =>
             {
                 var arg = info.ArgByIndex(1);
+                if (int.TryParse(arg, out int bots) == false)
+                {
+                    info.ReplyToCommand("Invalid argument");
+                    return;
+                }
                 Server.ExecuteCommand($"changelevel {arg}");
             });
             AddCommand("swapteams", "", (player, info) =>
@@ -149,7 +175,52 @@ namespace PracPlugin
                 var currentmap = Server.MapName;
                 Server.ExecuteCommand($"changelevel {currentmap}");
             });
-            
+            AddCommand("botdisableweapons", "", (player, info) =>
+            {
+                Server.ExecuteCommand("bot_allow_grenades 0");
+                Server.ExecuteCommand("bot_allow_pistols 0");
+                Server.ExecuteCommand("bot_allow_sub_machine_guns 0");
+                Server.ExecuteCommand("bot_allow_shotguns 0");
+                Server.ExecuteCommand("bot_allow_rifles 0");
+                Server.ExecuteCommand("bot_allow_snipers 0");
+                Server.ExecuteCommand("bot_allow_machine_guns 0");
+                Server.ExecuteCommand("bot_allow_knives 0");
+            });
+            AddCommand("botenableweapons", "", (player, info) =>
+            {
+
+                // could use bot_all_weapons
+                Server.ExecuteCommand("bot_allow_grenades 1");
+                Server.ExecuteCommand("bot_allow_pistols 1");
+                Server.ExecuteCommand("bot_allow_sub_machine_guns 1");
+                Server.ExecuteCommand("bot_allow_shotguns 1");
+                Server.ExecuteCommand("bot_allow_rifles 1");
+                Server.ExecuteCommand("bot_allow_snipers 1");
+                Server.ExecuteCommand("bot_allow_machine_guns 1");
+                Server.ExecuteCommand("bot_allow_knives 1");
+            });
+
+            AddCommand("botknifes", "", (player, info) =>
+            {
+                Server.ExecuteCommand("bot_knives_only 1");
+            });
+            AddCommand("botsnipers", "", (player, info) =>
+            {
+                Server.ExecuteCommand("bot_allow_snipers 1");
+            });
+            AddCommand("botpistol", "", (player, info) =>
+            {
+                Server.ExecuteCommand("bot_allow_pistols 1");
+            });
+            AddCommand("botsmg", "", (player, info) =>
+            {
+                Server.ExecuteCommand("bot_allow_sub_machine_guns 1");
+            });
+            AddCommand("botrifles", "", (player, info) =>
+            {
+                Server.ExecuteCommand("bot_allow_rifles 1");
+            });
+
             base.Load(hotReload);
         }
 
